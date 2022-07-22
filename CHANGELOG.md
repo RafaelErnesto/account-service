@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/RafaelErnesto/account-service/compare/v1.0.0...v1.0.1) (2022-07-22)
+
+
+### Documentation
+
+* small change to readme ([5928ab1](https://github.com/RafaelErnesto/account-service/commit/5928ab125cf34963fcbe3893f0e4e676b28cf275))
+
 ## 1.0.0 (2022-07-22)
 
 
