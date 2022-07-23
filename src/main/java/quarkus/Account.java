@@ -43,6 +43,8 @@ public class Account {
         return balance;
     }
 
+    public void setBalance(BigDecimal fundsToAdd) { balance.add(fundsToAdd);}
+
     public Long getAccountNumber() {
         return accountNumber;
     }

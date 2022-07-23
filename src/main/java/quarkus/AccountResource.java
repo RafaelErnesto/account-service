@@ -38,7 +38,7 @@ public class AccountResource {
                 .filter(account -> account.getAccountNumber().equals(accountNumber))
                 .findFirst();
         return response.orElseThrow(()
-        -> new NotFoundException("Account with id: " + accountNumber + " was not found"));
+                -> new NotFoundException("Account with id: " + accountNumber + " was not found"));
     }
 
     @POST
@@ -58,9 +58,34 @@ public class AccountResource {
                 .filter(account -> account.getAccountNumber().equals(accountNumber))
                 .findFirst();
 
-       accountFound.ifPresentOrElse(
-               account -> account.close(),
-               () -> { throw new NotFoundException("Account with number: " + accountNumber +" was not found");}
-       );
+        accountFound.ifPresentOrElse(
+                account -> account.close(),
+                () -> {
+                    throw new NotFoundException("Account with number: " + accountNumber + " was not found");
+                }
+        );
+    }
+
+    @PATCH
+    @Path("/{accountNumber}/add-funds")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Account addFounds(@PathParam("accountNumber") Long accountNumber, AddFundsRequestBody request) {
+        Optional<Account> accountFound = accounts.stream()
+                .filter(account -> account.getAccountNumber().equals(accountNumber) && !account.accountStatus.equals(AccountStatus.CLOSED))
+                .findFirst();
+
+        accountFound.ifPresentOrElse(
+                account -> {
+                    account.setBalance(request.funds);
+                    if (account.balance.signum() > 0 && account.accountStatus.equals(AccountStatus.OVERDRAWN)) {
+                        account.removeOverdrawnState();
+                    }
+                },
+                () -> {
+                    throw new NotFoundException("Account with number: " + accountNumber + " was not found");
+                }
+        );
+
+        return accountFound.get();
     }
 }
