@@ -45,11 +45,22 @@ public class AccountResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Account createAccount(CreateAccountRequestBody requestBody) {
-        long accountNumber = new Random().nextLong();
+        Long accountNumber = new Random().nextLong();
         Account account = new Account(accountNumber, requestBody.customerNumber, requestBody.customerName, requestBody.balance);
         accounts.add(account);
         return account;
     }
 
+    @DELETE
+    @Path("/{accountNumber}")
+    public void deleteAccount(@PathParam("accountNumber") Long accountNumber) {
+        Optional<Account> accountFound = accounts.stream()
+                .filter(account -> account.getAccountNumber().equals(accountNumber))
+                .findFirst();
 
+       accountFound.ifPresentOrElse(
+               account -> account.close(),
+               () -> { throw new NotFoundException("Account with number: " + accountNumber +" was not found");}
+       );
+    }
 }
