@@ -1,15 +1,15 @@
 package quarkus;
 
-import io.quarkus.vertx.http.runtime.webjar.WebJarNotFoundHandler;
+
+import org.jboss.resteasy.annotations.Body;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.ext.Provider;
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.Random;
 import java.util.Set;
 
 @Path("/accounts")
@@ -39,6 +39,16 @@ public class AccountResource {
                 .findFirst();
         return response.orElseThrow(()
         -> new NotFoundException("Account with id: " + accountNumber + " was not found"));
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Account createAccount(CreateAccountRequestBody requestBody) {
+        long accountNumber = new Random().nextLong();
+        Account account = new Account(accountNumber, requestBody.customerNumber, requestBody.customerName, requestBody.balance);
+        accounts.add(account);
+        return account;
     }
 
 
