@@ -1,13 +1,15 @@
 package quarkus;
 
+import io.quarkus.vertx.http.runtime.webjar.WebJarNotFoundHandler;
+
 import javax.annotation.PostConstruct;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.ext.Provider;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Path("/accounts")
@@ -26,6 +28,17 @@ public class AccountResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Set<Account> getAllAccounts() {
         return accounts;
+    }
+
+    @GET
+    @Path("/{accountNumber}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Account getAccount(@PathParam("accountNumber") Long accountNumber) {
+        Optional<Account> response = accounts.stream()
+                .filter(account -> account.getAccountNumber().equals(accountNumber))
+                .findFirst();
+        return response.orElseThrow(()
+        -> new NotFoundException("Account with id: " + accountNumber + " was not found"));
     }
 
 
