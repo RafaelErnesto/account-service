@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.1.0](https://github.com/RafaelErnesto/account-service/compare/v1.0.1...v1.1.0) (2022-07-23)
+
+
+### Features
+
+* add funds ([a787280](https://github.com/RafaelErnesto/account-service/commit/a78728008f5996f4e12d16c6104ddb28a746d7a3))
+* add get account ([6c06ca6](https://github.com/RafaelErnesto/account-service/commit/6c06ca6480855a099b80c0b98e7f8d598bd61061))
+* add get all accounts resource ([65a0e78](https://github.com/RafaelErnesto/account-service/commit/65a0e78e51226ba71f9de7e5cd6d87fe1bc952ce))
+* close account ([cd2e158](https://github.com/RafaelErnesto/account-service/commit/cd2e15871836843816f213a56d3768ba30576060))
+* create account ([9bf9683](https://github.com/RafaelErnesto/account-service/commit/9bf9683092b0946f39b0bd8ccbf67ac5005e5972))
+
 ## [1.0.1](https://github.com/RafaelErnesto/account-service/compare/v1.0.0...v1.0.1) (2022-07-22)
 
 
