@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/RafaelErnesto/account-service/compare/v1.1.0...v1.2.0) (2022-07-23)
+
+
+### Features
+
+* override methods on account entity ([1c72d44](https://github.com/RafaelErnesto/account-service/commit/1c72d4409f794657fa3f35879b49a9a5e45377a1))
+
 ## [1.1.0](https://github.com/RafaelErnesto/account-service/compare/v1.0.1...v1.1.0) (2022-07-23)
 
 
