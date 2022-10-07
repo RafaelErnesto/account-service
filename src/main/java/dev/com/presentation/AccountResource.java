@@ -20,7 +20,7 @@ public class AccountResource {
     @Path("/")
     @Produces(MediaType.TEXT_PLAIN)
     public String addUser(@Valid AddAccountRequestDto addAccountRequest) {
-        // return addUserUseCase.execute(addUserRequest);
-        return "";
+         addAccountUseCase.execute(addAccountRequest.toAccount());
+         return "";
     }
 }

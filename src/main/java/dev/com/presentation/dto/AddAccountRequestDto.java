@@ -1,5 +1,7 @@
 package dev.com.presentation.dto;
 
+import dev.com.domain.entities.Account;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
@@ -14,4 +16,8 @@ public class AddAccountRequestDto {
     String password;
     @Size(min = 3, max = 30, message = "Username must have between 3 and 30 characters")
     String username;
+
+    public Account toAccount(){
+        return new Account(this.name, this.email,this.password,this.username);
+    }
 }
