@@ -20,14 +20,14 @@ public class AddAccountUseCase {
     }
 
     public void execute(Account input) {
-        if (this.userAlreadyExists(input.getEmail())) {
-            throw new RuntimeException("User already exists");
+        if (this.accountAlreadyExists(input.getEmail())) {
+            throw new RuntimeException("Account already exists");
         }
-       // accountRepository.insert(input);
+        accountRepository.insert(input);
         accountEmitter.send(input);
     }
 
-    private boolean userAlreadyExists(String email) {
+    private boolean accountAlreadyExists(String email) {
         Account userFound = accountRepository.get(email);
         return userFound != null;
     }

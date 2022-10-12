@@ -13,7 +13,7 @@ import java.util.concurrent.CompletionStage;
 public class AccountEmitter {
 
     @Inject
-    @Channel("accounts-out")
+    @Channel("accounts-auth")
     Emitter<Account> accountEmitter;
 
     public void send(Account account){

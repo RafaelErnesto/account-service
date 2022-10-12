@@ -5,6 +5,22 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 
 public class Account {
+
+    String email;
+    String name;
+    String password;
+    String username;
+
+    String accountId;
+
+    public Account(String name, String email, String password, String username)  {
+        this.email = email;
+        this.name = name;
+        this.username = username;
+        this.password = hashPassword(password);
+        this.accountId = generateAccountId();
+    }
+
     public String getEmail() {
         return email;
     }
@@ -37,18 +53,6 @@ public class Account {
         this.username = username;
     }
 
-    String email;
-    String name;
-    String password;
-    String username;
-
-    public Account(String name, String email, String password, String username)  {
-        this.email = email;
-        this.name = name;
-        this.username = username;
-        this.password = hashPassword(password);
-    }
-
     private String hashPassword(String pwd)  {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -66,6 +70,10 @@ public class Account {
             ex.printStackTrace();
             throw new RuntimeException();
         }
+    }
+
+    private String generateAccountId(){
+        
     }
 
     public Boolean validatePassword(String password) {
